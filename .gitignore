@@ -35,3 +35,7 @@ pip-log.txt
 
 # Vim
 *.sw[op]
+
+/dlls
+/pkg-config/
+/pcl/_pcl_180.cpp

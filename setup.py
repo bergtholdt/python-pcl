@@ -256,7 +256,7 @@ if platform.system() == "Windows":
         # 1.8.0
         # boost 1.6.1
         # vtk 7.0
-        inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\\Eigen\\eigen3', pcl_root + '\\3rdParty\\Boost\\include\\boost-' + boost_version, pcl_root + '\\3rdParty\\FLANN\\include', pcl_root + '\\3rdParty\\VTK\\include\\vtk-' + vtk_version]
+        inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, eigen_root, boost_root + '\\include\\boost', flann_root + '\\include', vtk_root + '\\include\\vtk-' + vtk_version]
     else:
         inc_dirs = []
 
