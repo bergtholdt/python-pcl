@@ -199,8 +199,8 @@ if platform.system() == "Windows":
         # Visual Studio 2015
         if info.major == 3 and info.minor >= 5:
             # PCL 1.8.1
-            boost_version = '1_64'
-            vtk_version = '8.0'
+            boost_version = '1_65'
+            vtk_version = '8.1'
             # pcl-1.8
             # 1.8.1 use 2d required features
             pcl_libs = ["2d", "common", "features", "filters", "geometry",
