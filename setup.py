@@ -505,15 +505,17 @@ if platform.system() == "Windows":
         sys.exit(1)
 
     # copy the pcl dll to local subfolder so that it can be added to the package through the data_files option
-    listDlls=[]
-    if not os.path.isdir('./dlls'):
-        os.mkdir('./dlls')
-    for dll in libreleases:
-        pathDll=find_library(dll)
-        if not pathDll is None:
-            shutil.copy2(pathDll, './dlls' )
-            listDlls.append(os.path.join('.\\dlls',dll+'.dll'))
-    data_files=[('Lib/site-packages/pcl',listDlls)]# the path is relative to the python root folder 
+    listDlls = []
+    data_files = None
+    # commented out for conda
+    # if not os.path.isdir('./dlls'):
+    #     os.mkdir('./dlls')
+    # for dll in libreleases:
+    #     pathDll=find_library(dll)
+    #     if not pathDll is None:
+    #         shutil.copy2(pathDll, './dlls' )
+    #         listDlls.append(os.path.join('.\\dlls',dll+'.dll'))
+    # data_files=[('Lib/site-packages/pcl',listDlls)]# the path is relative to the python root folder 
 
 else:
     # Not 'Windows'
