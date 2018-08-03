@@ -753,8 +753,7 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
         # 
-        void
-        addCoordinateSystem (double scale = 1.0, const string& id, int viewport);
+        void addCoordinateSystem (double scale = 1.0, const string& id, int viewport);
 
         # brief Adds 3D axes describing a coordinate system to screen at x, y, z
         # param[in] scale the scale of the axes (default: 1)
@@ -764,8 +763,7 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
         # 
-        void
-        addCoordinateSystem (double scale, float x, float y, float z, const string& id, int viewport);
+        void addCoordinateSystem (double scale, float x, float y, float z, const string& id, int viewport);
 
         # brief Adds 3D axes describing a coordinate system to screen at x, y, z, Roll,Pitch,Yaw
         #
@@ -801,15 +799,13 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         #         y
         # endcode
         # 
-        void
-        addCoordinateSystem (double scale, const Eigen::Affine3f& t, const string& id, int viewport);
+        void addCoordinateSystem (double scale, const eigen3.Affine3f& t, const string& id, int viewport);
 
         # brief Removes a previously added 3D axes (coordinate system)
         # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport view port where the 3D axes should be removed from (default: all)
         # 
-        bool
-        removeCoordinateSystem (const string& id, int viewport);
+        bool removeCoordinateSystem (const string& id, int viewport);
        
         # brief Removes a Point Cloud from screen, based on a given ID.
         # param[in] id the point cloud object id (i.e., given on \a addPointCloud)
