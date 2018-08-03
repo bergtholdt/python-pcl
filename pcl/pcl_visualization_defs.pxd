@@ -750,35 +750,43 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         
         # brief Adds 3D axes describing a coordinate system to screen at 0,0,0.
         # param[in] scale the scale of the axes (default: 1)
+        # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
         # 
-        # void addCoordinateSystem (double scale = 1.0, int viewport = 0);
-        void addCoordinateSystem (double scale, int viewport)
-        
+        void
+        addCoordinateSystem (double scale = 1.0, const string& id, int viewport);
+
         # brief Adds 3D axes describing a coordinate system to screen at x, y, z
         # param[in] scale the scale of the axes (default: 1)
         # param[in] x the X position of the axes
         # param[in] y the Y position of the axes
         # param[in] z the Z position of the axes
+        # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
         # 
-        # void addCoordinateSystem (double scale, float x, float y, float z, int viewport = 0);
-        void addCoordinateSystem (double scale, float x, float y, float z, int viewport)
-        
+        void
+        addCoordinateSystem (double scale, float x, float y, float z, const string& id, int viewport);
+
         # brief Adds 3D axes describing a coordinate system to screen at x, y, z, Roll,Pitch,Yaw
+        #
         # param[in] scale the scale of the axes (default: 1)
         # param[in] t transformation matrix
+        # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
+        #
         # RPY Angles
         # Rotate the reference frame by the angle roll about axis x
         # Rotate the reference frame by the angle pitch about axis y
         # Rotate the reference frame by the angle yaw about axis z
+        #
         # Description:
         # Sets the orientation of the Prop3D.  Orientation is specified as
         # X,Y and Z rotations in that order, but they are performed as
         # RotateZ, RotateX, and finally RotateY.
+        #
         # All axies use right hand rule. x=red axis, y=green axis, z=blue axis
         # z direction is point into the screen.
+        # code
         #     z
         #      \
         #       \
@@ -791,15 +799,18 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         #         |
         #         |
         #         y
+        # endcode
         # 
-        # void addCoordinateSystem (double scale, const Eigen::Affine3f& t, int viewport = 0);
-        void addCoordinateSystem (double scale, const eigen3.Affine3f& t, int viewport)
-        
+        void
+        addCoordinateSystem (double scale, const Eigen::Affine3f& t, const string& id, int viewport);
+
         # brief Removes a previously added 3D axes (coordinate system)
+        # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport view port where the 3D axes should be removed from (default: all)
-        # bool removeCoordinateSystem (int viewport = 0);
-        bool removeCoordinateSystem (int viewport)
-        
+        # 
+        bool
+        removeCoordinateSystem (const string& id, int viewport);
+       
         # brief Removes a Point Cloud from screen, based on a given ID.
         # param[in] id the point cloud object id (i.e., given on \a addPointCloud)
         # param[in] viewport view port from where the Point Cloud should be removed (default: all)

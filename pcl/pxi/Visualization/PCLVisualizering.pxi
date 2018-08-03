@@ -38,17 +38,17 @@ cdef class PCLVisualizering:
     def SpinOnce(self, int millis_to_wait = 1, bool force_redraw = False):
         self.thisptr().spinOnce (millis_to_wait, force_redraw)
 
-    def AddCoordinateSystem(self, double scale = 1.0, int viewpoint = 0):
-        self.thisptr().addCoordinateSystem(scale, viewpoint)
+    def AddCoordinateSystem(self, double scale = 1.0, string id = "reference", int viewport = 0):
+        self.thisptr().addCoordinateSystem(scale, id, viewport)
 
-    def AddCoordinateSystem(self, double scale, float x, float y, float z, int viewpoint = 0):
-        self.thisptr().addCoordinateSystem(scale, x, y, z, viewpoint)
+    def AddCoordinateSystem(self, double scale, float x, float y, float z, string id = "reference", int viewport = 0):
+        self.thisptr().addCoordinateSystem(scale, x, y, z, id, viewport)
 
-    # void addCoordinateSystem (double scale, const eigen3.Affine3f& t, int viewport)
+    # void addCoordinateSystem (double scale, const eigen3.Affine3f& t, string id = "reference", int viewport = 0)
 
     # return bool
-    def removeCoordinateSystem (self, int viewport):
-        return self.thisptr().removeCoordinateSystem (viewport)
+    def removeCoordinateSystem (self, string id = "reference", int viewport = 0):
+        return self.thisptr().removeCoordinateSystem (id, viewport)
 
     # return bool
     def RemovePointCloud(self, string id, int viewport):
