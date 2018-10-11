@@ -647,7 +647,7 @@ else:
 setup(name='python-pcl',
       description='pcl wrapper',
       url='http://github.com/strawlab/python-pcl',
-      version='0.3',
+      version='1.8.1',
       author='John Stowers',
       author_email='john.stowers@gmail.com',
       maintainer='Tooru Oonuma',
