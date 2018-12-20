@@ -56,108 +56,29 @@ if platform.system() == "Windows":
     # if is_64bits == True
 
     # environment Value
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "PCL_ROOT":
-            pcl_root = v
-            # print(pcl_root)
-            # print("%s: find environment PCL_ROOT" % pcl_root)
-            break
-    else:
+    pcl_root = os.environ.get('PCL_ROOT', None)
+    if pcl_root is None:
         print("cannot find environment PCL_ROOT", file=sys.stderr)
         sys.exit(1)
 
-    # Add environment Value
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "PKG_CONFIG_PATH":
-            pkgconfigstr = v
-            break
-    else:
-        # print("cannot find environment PKG_CONFIG_PATH", file=sys.stderr)
-        print("cannot find environment PKG_CONFIG_PATH")
-        pkgconfigstr = pcl_root + '\\lib\\pkgconfig;' + pcl_root + \
-            '\\3rdParty\\FLANN\\lib\\pkgconfig;' + \
-            pcl_root + '\\3rdParty\\Eigen\\lib\\pkgconfig;'
-        os.environ["PKG_CONFIG_PATH"] = pcl_root + '\\lib\\pkgconfig;' + pcl_root + \
-            '\\3rdParty\\FLANN\\lib\\pkgconfig;' + \
-            pcl_root + '\\3rdParty\\Eigen\\lib\\pkgconfig;'
+    pkgconfigstr = pcl_root + '\\lib\\pkgconfig;' + pcl_root + \
+        '\\3rdParty\\FLANN\\lib\\pkgconfig;' + \
+        pcl_root + '\\3rdParty\\Eigen\\lib\\pkgconfig;'
+    os.environ["PKG_CONFIG_PATH"] = pcl_root + '\\lib\\pkgconfig;' + pcl_root + \
+        '\\3rdParty\\FLANN\\lib\\pkgconfig;' + \
+        pcl_root + '\\3rdParty\\Eigen\\lib\\pkgconfig;'
 
     print("set environment PKG_CONFIG_PATH=%s" % pkgconfigstr)
 
-    # other package(common)
-    # BOOST_ROOT
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "BOOST_ROOT":
-            boost_root = v
-            break
-    else:
-        boost_root = pcl_root + '\\3rdParty\\Boost'
-
-    # EIGEN_ROOT
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "EIGEN_ROOT":
-            eigen_root = v
-            break
-    else:
-        eigen_root = pcl_root + '\\3rdParty\\Eigen'
-
-    # FLANN_ROOT
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "FLANN_ROOT":
-            flann_root = v
-            break
-    else:
-        flann_root = pcl_root + '\\3rdParty\\FLANN'
-
-    # QHULL_ROOT
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "QHULL_ROOT":
-            qhull_root = v
-            break
-    else:
-        qhull_root = pcl_root + '\\3rdParty\\Qhull'
-
-    # VTK_DIR
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "VTK_DIR":
-            vtk_root = v
-            break
-    else:
-        vtk_root = pcl_root + '\\3rdParty\\VTK'
+    boost_root = os.environ.get('BOOST_ROOT', pcl_root + '\\3rdParty\\Boost')
+    eigen_root = os.environ.get('EIGEN_ROOT', pcl_root + '\\3rdParty\\Eigen')
+    flann_root = os.environ.get('FLANN_ROOT', pcl_root + '\\3rdParty\\Flann')
+    qhull_root = os.environ.get('QHULL_ROOT', pcl_root + '\\3rdParty\\Qhull')
+    vtk_root = os.environ.get('VTK_ROOT', pcl_root + '\\3rdParty\\VTK')
+    pcl_version = '-' + os.environ.get('PCL_VERSION', '1.8')
 
     # custom(CUDA)
     # custom(WinPcap)
-
-    # get pkg-config.exe filePath
-    pkgconfigPath = os.getcwd() + '\\pkg-config\\pkg-config.exe'
-    print(pkgconfigPath)
-
-    # AppVeyor Check
-    for k, v in os.environ.items():
-        # print("{key} : {value}".format(key=k, value=v))
-        if k == "PCL_VERSION":
-            pcl_version = '-' + v
-            break
-    else:
-        # Try to find PCL. XXX we should only do this when trying to build or install.
-        PCL_SUPPORTED = ["-1.8", "-1.7", "-1.6", ""]    # in order of preference
-
-        for pcl_version in PCL_SUPPORTED:
-            if subprocess.call(['.\\pkg-config\\pkg-config.exe', 'pcl_common%s' % pcl_version]) == 0:
-            # if subprocess.call([pkgconfigPath, 'pcl_common%s' % pcl_version]) == 0:
-                break
-        else:
-            print("%s: error: cannot find PCL, tried" %
-                  sys.argv[0], file=sys.stderr)
-            for version in PCL_SUPPORTED:
-                print('    pkg-config pcl_common%s' % version, file=sys.stderr)
-            sys.exit(1)
 
     print(pcl_version)
     # pcl_version = '-1.6'
@@ -165,56 +86,15 @@ if platform.system() == "Windows":
     # Python Version Check
     info = sys.version_info
 
-    if pcl_version == '-1.6':
-        # PCL 1.6.0 python Version == 3.4(>= 3.4?, 2.7 -> NG)
-        # Visual Studio 2010
-        if info.major == 3 and info.minor == 4:
-            boost_version = '1_49'
-            vtk_version = '5.8'
-            pcl_libs = ["common", "features", "filters", "kdtree", "octree",
-                        "registration", "sample_consensus", "search", "segmentation",
-                        "surface", "tracking", "visualization"]
-            pass
-        else:
-            print('no building Python Version')
-            sys.exit(1)
-    elif pcl_version == '-1.7':
-        # PCL 1.7.2 python Version >= 3.5
-        # Visual Studio 2015
-        if info.major == 3 and info.minor >= 5:
-            boost_version = '1_57'
-            vtk_version = '6.2'
-            pass
-            # pcl-1.8
-            # 1.8.1 use 2d required features
-            pcl_libs = ["2d", "common", "features", "filters", "geometry",
-                        "io", "kdtree", "keypoints", "ml", "octree", "outofcore", "people",
-                    "recognition", "registration", "sample_consensus", "search",
-                    "segmentation", "stereo", "surface", "tracking", "visualization"]
-        else:
-            print('no building Python Version')
-            sys.exit(1)
-    elif pcl_version == '-1.8':
-        # PCL 1.8.0 python Version >= 3.5
-        # Visual Studio 2015
-        if info.major == 3 and info.minor >= 5:
-            # PCL 1.8.1
-            boost_version = '1_65'
-            vtk_version = '8.1'
-            # pcl-1.8
-            # 1.8.1 use 2d required features
-            pcl_libs = ["2d", "common", "features", "filters", "geometry",
-                        "io", "kdtree", "keypoints", "ml", "octree", "outofcore", "people",
-                    "recognition", "registration", "sample_consensus", "search",
-                    "segmentation", "stereo", "surface", "tracking", "visualization"]
-            pass
-        else:
-            print('no building Python Version')
-            sys.exit(1)
-    else:
-        print('pcl_version Unknown')
-        sys.exit(1)
-
+    # PCL 1.8.1
+    boost_version = '1_65'
+    vtk_version = '8.1'
+    # pcl-1.8
+    # 1.8.1 use 2d required features
+    pcl_libs = ["2d", "common", "features", "filters", "geometry",
+                "io", "kdtree", "keypoints", "ml", "octree", "outofcore", "people",
+            "recognition", "registration", "sample_consensus", "search",
+            "segmentation", "stereo", "surface", "tracking", "visualization"]
     # Find build/link options for PCL using pkg-config.
 
     pcl_libs = ["pcl_%s%s" % (lib, pcl_version) for lib in pcl_libs]
@@ -644,7 +524,7 @@ else:
 
 
 
-setup(name='python-pcl',
+setup(name='python_pcl',
       description='pcl wrapper',
       url='http://github.com/strawlab/python-pcl',
       version='1.8.1',
