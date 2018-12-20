@@ -386,6 +386,7 @@ if platform.system() == "Windows":
 
     ext_args['extra_compile_args'].append('-DBOOST_ALL_NO_LIB')
     ext_args['extra_compile_args'].append('-DBOOST_ALL_DYN_LINK')
+    ext_args['libraries'].append('lboost_system.lib')
 
 
     # copy the pcl dll to local subfolder so that it can be added to the package through the data_files option
