@@ -753,7 +753,7 @@ cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualizat
         # param[in] id the coordinate system object id (default: reference)
         # param[in] viewport the view port where the 3D axes should be added (default: all)
         # 
-        void addCoordinateSystem (double scale = 1.0, const string& id, int viewport);
+        void addCoordinateSystem (double scale, const string& id, int viewport);
 
         # brief Adds 3D axes describing a coordinate system to screen at x, y, z
         # param[in] scale the scale of the axes (default: 1)
