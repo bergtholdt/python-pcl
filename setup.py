@@ -384,6 +384,8 @@ if platform.system() == "Windows":
         print('no pcl install or pkg-config missed.')
         sys.exit(1)
 
+    ext_args['extra_compile_args'].append('/DBOOST_ALL_NO_LIB')
+
     # copy the pcl dll to local subfolder so that it can be added to the package through the data_files option
     listDlls = []
     data_files = None
