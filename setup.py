@@ -14,6 +14,7 @@ import platform
 import os
 import time
 
+from glob import glob
 import shutil
 from ctypes.util import find_library
 setup_requires = []
@@ -354,6 +355,16 @@ if platform.system() == "Windows":
     # define_macros=[('EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET', '1')],
     # extra_compile_args=["/EHsc"],
 
+    ext_args['extra_compile_args'].append('-DBOOST_ALL_NO_LIB')
+    ext_args['extra_compile_args'].append('-DBOOST_ALL_DYN_LINK')
+    if 'BOOST_ROOT' in os.environ:
+        # look for boost library
+        fn = glob(os.environ['BOOST_ROOT'] + '/lib/boost_system*.lib')[0]
+        _, name = os.path.split(fn)
+        ext_args['libraries'].append(name[:-4])
+    else:
+        ext_args['libraries'].append('boost_system')
+
     print(ext_args)
 
     if pcl_version == '-1.6':
@@ -383,11 +394,6 @@ if platform.system() == "Windows":
     else:
         print('no pcl install or pkg-config missed.')
         sys.exit(1)
-
-    ext_args['extra_compile_args'].append('-DBOOST_ALL_NO_LIB')
-    ext_args['extra_compile_args'].append('-DBOOST_ALL_DYN_LINK')
-    ext_args['libraries'].append('boost_system')
-
 
     # copy the pcl dll to local subfolder so that it can be added to the package through the data_files option
     listDlls = []
