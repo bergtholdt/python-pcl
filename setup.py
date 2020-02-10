@@ -116,24 +116,7 @@ if platform.system() == "Windows":
     #     ext_args['include_dirs'].append(flag.lstrip().rstrip())
 
     # no use pkg-config
-    if pcl_version == '-1.6':
-        # 1.6.0
-        # boost 1.5.5
-        # vtk 5.8
-        # ext_args['include_dirs'].append([pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\Eigen\\include', pcl_root + '\\3rdParty\\Boost\\include', pcl_root + '\\3rdParty\\FLANN\include'])
-        # inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\Eigen\\include', pcl_root + '\\3rdParty\\Boost\\include', pcl_root + '\\3rdParty\\FLANN\include']
-        # NG
-        # inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\Eigen\\include', pcl_root + '\\3rdParty\\FLANN\\include']
-        # 3rdParty
-        # inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\Eigen\\include', pcl_root + '\\3rdParty\\Boost\\include', pcl_root + '\\3rdParty\\FLANN\\include']
-        # + add VTK
-        inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\Eigen\\include', pcl_root + '\\3rdParty\\Boost\\include', pcl_root + '\\3rdParty\\FLANN\\include', pcl_root + '\\3rdParty\\VTK\\include\\vtk-' + vtk_version]
-    elif pcl_version == '-1.7':
-        # 1.7.2
-        # boost 1.5.7
-        # vtk 6.2
-        inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, pcl_root + '\\3rdParty\\\Eigen\\eigen3', pcl_root + '\\3rdParty\\Boost\\include\\boost-' + boost_version, pcl_root + '\\3rdParty\\FLANN\\include', pcl_root + '\\3rdParty\\VTK\\include\\vtk-' + vtk_version]
-    elif pcl_version == '-1.8':
+    if pcl_version == '-1.8':
         # 1.8.0
         # boost 1.6.1
         # vtk 7.0
@@ -154,15 +137,7 @@ if platform.system() == "Windows":
     # end
 
     # set library path
-    if pcl_version == '-1.6':
-        # 3rdParty(+Boost, +VTK)
-        lib_dirs = [pcl_root + '\\lib', pcl_root + '\\3rdParty\\Boost\\lib', pcl_root + '\\3rdParty\\FLANN\\lib', pcl_root + '\\3rdParty\\VTK\lib\\vtk-5.8']
-        # extern -> NG?
-    elif pcl_version == '-1.7':
-        # 1.7.2
-        # 3rdParty(+Boost, +VTK)
-        lib_dirs = [pcl_root + '\\lib', pcl_root + '\\3rdParty\\Boost\\lib', pcl_root + '\\3rdParty\\FLANN\\lib', pcl_root + '\\3rdParty\\VTK\lib']
-    elif pcl_version == '-1.8':
+    if pcl_version == '-1.8':
         # 1.8.0
         # 3rdParty(+Boost, +VTK)
         lib_dirs = [pcl_root + '\\lib', pcl_root + '\\3rdParty\\Boost\\lib', pcl_root + '\\3rdParty\\FLANN\\lib', pcl_root + '\\3rdParty\\VTK\lib']
@@ -189,32 +164,7 @@ if platform.system() == "Windows":
     #         continue
     #     ext_args['libraries'].append(flag.lstrip().rstrip())
 
-    if pcl_version == '-1.6':
-        # release
-        # libreleases = ['pcl_apps_release', 'pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s']
-        # release + vtk
-        libreleases = ['pcl_apps_release', 'pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'vtkInfovis', 'MapReduceMPI', 'vtkNetCDF', 'QVTK', 'vtkNetCDF_cxx', 'vtkRendering', 'vtkViews', 'vtkVolumeRendering', 'vtkWidgets', 'mpistubs', 'vtkalglib', 'vtkCharts', 'vtkexoIIc', 'vtkexpat', 'vtkCommon', 'vtkfreetype', 'vtkDICOMParser', 'vtkftgl', 'vtkFiltering', 'vtkhdf5', 'vtkjpeg', 'vtkGenericFiltering', 'vtklibxml2', 'vtkGeovis', 'vtkmetaio', 'vtkpng', 'vtkGraphics', 'vtkproj4', 'vtkHybrid', 'vtksqlite', 'vtksys', 'vtkIO', 'vtktiff', 'vtkImaging', 'vtkverdict', 'vtkzlib']
-
-        # add boost
-        # dynamic lib
-        # libreleases = ['pcl_apps_release', 'pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'boost_date_time-vc100-mt-1_47', 'boost_filesystem-vc100-mt-1_49', 'boost_graph-vc100-mt-1_49', 'boost_graph_parallel-vc100-mt-1_49', 'boost_iostreams-vc100-mt-1_49', 'boost_locale-vc100-mt-1_49', 'boost_math_c99-vc100-mt-1_49', 'boost_math_c99f-vc100-mt-1_49', 'boost_math_tr1-vc100-mt-1_49', 'boost_math_tr1f-vc100-mt-1_49', 'boost_mpi-vc100-mt-1_49', 'boost_prg_exec_monitor-vc100-mt-1_49', 'boost_program_options-vc100-mt-1_49', 'boost_random-vc100-mt-1_49', 'boost_regex-vc100-mt-1_49', 'boost_serialization-vc100-mt-1_49', 'boost_signals-vc100-mt-1_49', 'boost_system-vc100-mt-1_49', 'boost_thread-vc100-mt-1_49', 'boost_timer-vc100-mt-1_49', 'boost_unit_test_framework-vc100-mt-1_49', 'boost_wave-vc100-mt-1_49', 'boost_wserialization-vc100-mt-1_49']
-        # static lib
-        # boost_chrono-vc100-mt-1_49 -> NG(1.47/1.49)
-        # boost_date_time-vc100-mt-1_49.lib -> NG
-        # libreleases = ['pcl_apps_release', 'pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'libboost_date_time-vc100-mt-1_49', 'libboost_filesystem-vc100-mt-1_49', 'libboost_graph_parallel-vc100-mt-1_49', 'libboost_iostreams-vc100-mt-1_49', 'libboost_locale-vc100-mt-1_49', 'libboost_math_c99-vc100-mt-1_49', 'libboost_math_c99f-vc100-mt-1_49', 'libboost_math_tr1-vc100-mt-1_49', 'libboost_math_tr1f-vc100-mt-1_49', 'libboost_mpi-vc100-mt-1_49', 'libboost_prg_exec_monitor-vc100-mt-1_49', 'libboost_program_options-vc100-mt-1_49', 'libboost_random-vc100-mt-1_49', 'libboost_regex-vc100-mt-1_49', 'libboost_serialization-vc100-mt-1_49', 'libboost_signals-vc100-mt-1_49', 'libboost_system-vc100-mt-1_49', 'libboost_test_exec_monitor-vc100-mt-1_49', 'libboost_thread-vc100-mt-1_49', 'libboost_timer-vc100-mt-1_49', 'libboost_unit_test_framework-vc100-mt-1_49', 'libboost_wave-vc100-mt-1_49', 'libboost_wserialization-vc100-mt-1_49']
-        # 'MapReduceMPI-gd.lib', 'vtkNetCDF-gd.lib', 'QVTK-gd.lib', 'vtkNetCDF_cxx-gd.lib', 'vtkRendering-gd.lib', 'vtkViews-gd.lib', 'vtkVolumeRendering-gd.lib', 'vtkWidgets-gd.lib', 'mpistubs-gd.lib', 'vtkalglib-gd.lib', 'vtkCharts-gd.lib', 'vtkexoIIc-gd.lib', 'vtkexpat-gd.lib', 'vtkCommon-gd.lib', 'vtkfreetype-gd.lib', 'vtkDICOMParser-gd.lib', 'vtkftgl-gd.lib', 'vtkFiltering-gd.lib', 'vtkhdf5-gd.lib', 'vtkjpeg-gd.lib', 'vtkGenericFiltering-gd.lib', 'vtklibxml2-gd.lib', 'vtkGeovis-gd.lib', 'vtkmetaio-gd.lib', 'vtkpng-gd.lib', 'vtkGraphics-gd.lib', 'vtkproj4-gd.lib', 'vtkHybrid-gd.lib', 'vtksqlite-gd.lib', 'vtksys-gd.lib', 'vtkIO-gd.lib', 'vtktiff-gd.lib', 'vtkImaging-gd.lib', 'vtkverdict-gd.lib', 'vtkzlib-gd.lib', 'vtkInfovis-gd.lib', 
-        # add boost
-        # dynamic lib
-        # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'boost_date_time-vc100-mt-1_47', 'boost_filesystem-vc100-mt-1_49', 'boost_graph-vc100-mt-1_49', 'boost_graph_parallel-vc100-mt-1_49', 'boost_iostreams-vc100-mt-1_49', 'boost_locale-vc100-mt-1_49', 'boost_math_c99-vc100-mt-1_49', 'boost_math_c99f-vc100-mt-1_49', 'boost_math_tr1-vc100-mt-1_49', 'boost_math_tr1f-vc100-mt-1_49', 'boost_mpi-vc100-mt-1_49', 'boost_prg_exec_monitor-vc100-mt-1_49', 'boost_program_options-vc100-mt-1_49', 'boost_random-vc100-mt-1_49', 'boost_regex-vc100-mt-1_49', 'boost_serialization-vc100-mt-1_49', 'boost_signals-vc100-mt-1_49', 'boost_system-vc100-mt-1_49', 'boost_thread-vc100-mt-1_49', 'boost_timer-vc100-mt-1_49', 'boost_unit_test_framework-vc100-mt-1_49', 'boost_wave-vc100-mt-1_49', 'boost_wserialization-vc100-mt-1_49']
-        # static lib
-        # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'libboost_date_time-vc100-mt-1_49', 'libboost_filesystem-vc100-mt-1_49', 'libboost_graph_parallel-vc100-mt-1_49', 'libboost_iostreams-vc100-mt-1_49', 'libboost_locale-vc100-mt-1_49', 'libboost_math_c99-vc100-mt-1_49', 'libboost_math_c99f-vc100-mt-1_49', 'libboost_math_tr1-vc100-mt-1_49', 'libboost_math_tr1f-vc100-mt-1_49', 'libboost_mpi-vc100-mt-1_49', 'libboost_prg_exec_monitor-vc100-mt-1_49', 'libboost_program_options-vc100-mt-1_49', 'libboost_random-vc100-mt-1_49', 'libboost_regex-vc100-mt-1_49', 'libboost_serialization-vc100-mt-1_49', 'libboost_signals-vc100-mt-1_49', 'libboost_system-vc100-mt-1_49', 'libboost_test_exec_monitor-vc100-mt-1_49', 'libboost_thread-vc100-mt-1_49', 'libboost_timer-vc100-mt-1_49', 'libboost_unit_test_framework-vc100-mt-1_49', 'libboost_wave-vc100-mt-1_49', 'libboost_wserialization-vc100-mt-1_49']
-    elif pcl_version == '-1.7':
-        # release
-        # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s']
-        # release + vtk
-        libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_outofcore_release', 'pcl_people_release', 'pcl_recognition_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_search_release', 'pcl_segmentation_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'vtkalglib-' + vtk_version, 'vtkChartsCore-' + vtk_version, 'vtkCommonColor-' + vtk_version, 'vtkCommonComputationalGeometry-' + vtk_version, 'vtkCommonCore-' + vtk_version, 'vtkCommonDataModel-' + vtk_version, 'vtkCommonExecutionModel-' + vtk_version, 'vtkCommonMath-' + vtk_version, 'vtkCommonMisc-' + vtk_version, 'vtkCommonSystem-' + vtk_version, 'vtkCommonTransforms-' + vtk_version, 'vtkDICOMParser-' + vtk_version, 'vtkDomainsChemistry-' + vtk_version, 'vtkexoIIc-' + vtk_version, 'vtkexpat-' + vtk_version, 'vtkFiltersAMR-' + vtk_version, 'vtkFiltersCore-' + vtk_version, 'vtkFiltersExtraction-' + vtk_version, 'vtkFiltersFlowPaths-' + vtk_version, 'vtkFiltersGeneral-' + vtk_version, 'vtkFiltersGeneric-' + vtk_version, 'vtkFiltersGeometry-' + vtk_version, 'vtkFiltersHybrid-' + vtk_version, 'vtkFiltersHyperTree-' + vtk_version, 'vtkFiltersImaging-' + vtk_version, 'vtkFiltersModeling-' + vtk_version, 'vtkFiltersParallel-' + vtk_version, 'vtkFiltersParallelImaging-' + vtk_version, 'vtkFiltersProgrammable-' + vtk_version, 'vtkFiltersSelection-' + vtk_version, 'vtkFiltersSMP-' + vtk_version, 'vtkFiltersSources-' + vtk_version, 'vtkFiltersStatistics-' + vtk_version, 'vtkFiltersTexture-' + vtk_version, 'vtkFiltersVerdict-' + vtk_version, 'vtkfreetype-' + vtk_version, 'vtkGeovisCore-' + vtk_version, 'vtkgl2ps-' + vtk_version, 'vtkhdf5-' + vtk_version, 'vtkhdf5_hl-' + vtk_version,
-                       'vtkImagingColor-' + vtk_version, 'vtkImagingCore-' + vtk_version, 'vtkImagingFourier-' + vtk_version, 'vtkImagingGeneral-' + vtk_version, 'vtkImagingHybrid-' + vtk_version, 'vtkImagingMath-' + vtk_version, 'vtkImagingMorphological-' + vtk_version, 'vtkImagingSources-' + vtk_version, 'vtkImagingStatistics-' + vtk_version, 'vtkImagingStencil-' + vtk_version, 'vtkInfovisCore-' + vtk_version, 'vtkInfovisLayout-' + vtk_version, 'vtkInteractionImage-' + vtk_version, 'vtkInteractionStyle-' + vtk_version, 'vtkInteractionWidgets-' + vtk_version, 'vtkIOAMR-' + vtk_version, 'vtkIOCore-' + vtk_version, 'vtkIOEnSight-' + vtk_version, 'vtkIOExodus-' + vtk_version, 'vtkIOExport-' + vtk_version, 'vtkIOGeometry-' + vtk_version, 'vtkIOImage-' + vtk_version, 'vtkIOImport-' + vtk_version, 'vtkIOInfovis-' + vtk_version, 'vtkIOLegacy-' + vtk_version, 'vtkIOLSDyna-' + vtk_version, 'vtkIOMINC-' + vtk_version, 'vtkIOMovie-' + vtk_version, 'vtkIONetCDF-' + vtk_version, 'vtkIOParallel-' + vtk_version, 'vtkIOParallelXML-' + vtk_version, 'vtkIOPLY-' + vtk_version, 'vtkIOSQL-' + vtk_version, 'vtkIOVideo-' + vtk_version, 'vtkIOXML-' + vtk_version, 'vtkIOXMLParser-' + vtk_version, 'vtkjpeg-' + vtk_version, 'vtkjsoncpp-' + vtk_version, 'vtklibxml2-' + vtk_version, 'vtkmetaio-' + vtk_version, 'vtkNetCDF-' + vtk_version, 'vtkNetCDF_cxx-' + vtk_version, 'vtkoggtheora-' + vtk_version, 'vtkParallelCore-' + vtk_version, 'vtkpng-' + vtk_version, 'vtkproj4-' + vtk_version, 'vtkRenderingAnnotation-' + vtk_version, 'vtkRenderingContext2D-' + vtk_version, 'vtkRenderingContextOpenGL-' + vtk_version, 'vtkRenderingCore-' + vtk_version, 'vtkRenderingFreeType-' + vtk_version, 'vtkRenderingGL2PS-' + vtk_version, 'vtkRenderingImage-' + vtk_version, 'vtkRenderingLabel-' + vtk_version, 'vtkRenderingLIC-' + vtk_version, 'vtkRenderingLOD-' + vtk_version, 'vtkRenderingOpenGL-' + vtk_version, 'vtkRenderingVolume-' + vtk_version, 'vtkRenderingVolumeOpenGL-' + vtk_version, 'vtksqlite-' + vtk_version, 'vtksys-' + vtk_version, 'vtktiff-' + vtk_version, 'vtkverdict-' + vtk_version, 'vtkViewsContext2D-' + vtk_version, 'vtkViewsCore-' + vtk_version, 'vtkViewsInfovis-' + vtk_version, 'vtkzlib-' + vtk_version]
-    elif pcl_version == '-1.8':
+    if pcl_version == '-1.8':
         # release
         # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s']
         # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'vtkInfovis', 'MapReduceMPI', 'vtkNetCDF', 'QVTK', 'vtkNetCDF_cxx', 'vtkRendering', 'vtkViews', 'vtkVolumeRendering', 'vtkWidgets', 'mpistubs', 'vtkalglib', 'vtkCharts', 'vtkexoIIc', 'vtkexpat', 'vtkCommon', 'vtkfreetype', 'vtkDICOMParser', 'vtkftgl', 'vtkFiltering', 'vtkhdf5', 'vtkjpeg', 'vtkGenericFiltering', 'vtklibxml2', 'vtkGeovis', 'vtkmetaio', 'vtkpng', 'vtkGraphics', 'vtkproj4', 'vtkHybrid', 'vtksqlite', 'vtksys', 'vtkIO', 'vtktiff', 'vtkImaging', 'vtkverdict', 'vtkzlib']
@@ -249,21 +199,7 @@ if platform.system() == "Windows":
     # Add OpenGL32 .h/.lib
     win_kit_incs = []
     win_kit_libdirs = []
-    if pcl_version == '-1.6':
-        if is_64bits == True:
-            # win_opengl_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Lib\\x64']
-            # AppVeyor
-            win_kit_libdirs = ['C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib\\x64']
-        else:
-            # win_opengl_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Lib\\win32']
-            # AppVeyor
-            win_kit_libdirs = ['C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib\\win32']
-    elif pcl_version == '-1.7':
-        if is_64bits == True:
-            win_kit_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v8.0A\\Lib\\x64']
-        else:
-            win_kit_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v8.0A\\Lib\\win32']
-    elif pcl_version == '-1.8':
+    if pcl_version == '-1.8':
         if is_64bits == True:
             # already set path
             # win_kit_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v8.1A\\Lib\\x64']
@@ -367,23 +303,7 @@ if platform.system() == "Windows":
 
     print(ext_args)
 
-    if pcl_version == '-1.6':
-        module = [Extension("pcl._pcl", ["pcl/_pcl.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
-                  Extension("pcl.pcl_visualization", [
-                      "pcl/pcl_visualization.pyx"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
-                  # debug
-                  # gdb_debug=True,
-                  ]
-    elif pcl_version == '-1.7':
-        module = [Extension("pcl._pcl", ["pcl/_pcl_172.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
-                  Extension("pcl.pcl_visualization", [
-                      "pcl/pcl_visualization.pyx"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
-                  # debug
-                  # gdb_debug=True,
-                  ]
-    elif pcl_version == '-1.8':
+    if pcl_version == '-1.8':
         module = [Extension("pcl._pcl", ["pcl/_pcl_180.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
                   Extension("pcl.pcl_visualization", [
                       "pcl/pcl_visualization.pyx"], language="c++", **ext_args),
@@ -414,7 +334,7 @@ else:
         os.environ['ARCHFLAGS'] = ''
 
     # Try to find PCL. XXX we should only do this when trying to build or install.
-    PCL_SUPPORTED = ["-1.8", "-1.7", "-1.6", ""]    # in order of preference
+    PCL_SUPPORTED = ["-1.8", ""]    # in order of preference
 
     for pcl_version in PCL_SUPPORTED:
         if subprocess.call(['pkg-config', 'pcl_common%s' % pcl_version]) == 0:
@@ -505,21 +425,9 @@ else:
     ext_args['define_macros'].append(
         ("EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET", "1"))
 
-    if pcl_version == '-1.6':
-        module = [Extension("pcl._pcl", ["pcl/_pcl.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_visualization", ["pcl/pcl_visualization.pyx"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
-                  # debug
-                  # gdb_debug=True,
-                  ]
-    elif pcl_version == '-1.7':
-        module = [Extension("pcl._pcl", ["pcl/_pcl_172.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_visualization", ["pcl/pcl_visualization.pyx"], language="c++", **ext_args),
-                  # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
-                  # debug
-                  # gdb_debug=True,
-                  ]
-    elif pcl_version == '-1.8':
+    print(ext_args)
+
+    if pcl_version == '-1.8':
         module = [Extension("pcl._pcl", ["pcl/_pcl_180.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
                   # Extension("pcl.pcl_visualization", ["pcl/pcl_visualization.pyx"], language="c++", **ext_args),
                   # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
@@ -532,7 +440,6 @@ else:
 
     listDlls=[]
     data_files=None			
-
 
 
 setup(name='python_pcl',
