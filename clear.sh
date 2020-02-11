@@ -10,8 +10,6 @@ sudo rm pcl/pcl_registration_172.cpp
 sudo rm pcl/pcl_registration_172.pyd
 sudo rm pcl/pcl_registration_180.cpp
 sudo rm pcl/pcl_registration_180.pyd
-sudo rm pcl/pcl_visualization.cpp
-sudo rm pcl/pcl_visualization.pyd
 sudo rm pcl/pcl_grabber.cpp
 sudo rm pcl/pcl_grabber.pyd
 sudo rm pcl/pcl_grabber_180.cpp

@@ -9,7 +9,7 @@ import pcl
 
 cloud = pcl.load('./examples/pcldata/tutorials/lamppost.pcd')
 
-# 1.8
+# 1.9
 # pcl::MomentOfInertiaEstimation <pcl::PointXYZ> feature_extractor;
 feature_extractor = cloud.make_MomentOfInertiaEstimation()
 # feature_extractor.setInputCloud (cloud)

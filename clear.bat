@@ -10,8 +10,6 @@ del pcl\pcl_registration_172.cpp
 del pcl\pcl_registration_172.pyd
 del pcl\pcl_registration_180.cpp
 del pcl\pcl_registration_180.pyd
-del pcl\pcl_visualization.cpp
-del pcl\pcl_visualization.pyd
 del pcl\pcl_grabber.cpp
 del pcl\pcl_grabber.pyd
 rd /s /q build

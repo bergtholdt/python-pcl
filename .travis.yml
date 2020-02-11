@@ -114,15 +114,15 @@ matrix:
     # - os: linux
     #   python: "2.7"
     #   env:
-    #   - PCL_VERSION="1.8"
+    #   - PCL_VERSION="1.9"
     # - os: linux
     #   python: "3.5"
     #   env:
-    #   - PCL_VERSION="1.8"
+    #   - PCL_VERSION="1.9"
     # - os: linux
     #   python: "3.6"
     #   env:
-    #   - PCL_VERSION="1.8"
+    #   - PCL_VERSION="1.9"
 
     # TravisCI TimeLimit 50min
     # gcc
@@ -178,10 +178,10 @@ matrix:
     #   - NOSEATTR="not pcl_ver_0_4"
 
 
-# pcl 1.8.1 only(MacOSX/Ubuntu)
-# pcl_2d-1.8.pc copy /usr/local/lib/pkgconfig/pcl_2d-1.8.pc
+# pcl 1.9.1 only(MacOSX/Ubuntu)
+# pcl_2d-1.9.pc copy /usr/local/lib/pkgconfig/pcl_2d-1.9.pc
 # Check command
-# pkg-config pcl_2d-1.8 --libs
+# pkg-config pcl_2d-1.9 --libs
 before_install:
   - if [ ${TRAVIS_OS_NAME} = "osx" ]; then
       brew update >/dev/null;
@@ -197,7 +197,7 @@ before_install:
       
       ls /usr/local/include;
       
-      cp -n ./travisCI/pcl_2d-1.8.pc /usr/local/lib/pkgconfig/pcl_2d-1.8.pc;
+      cp -n ./travisCI/pcl_2d-1.9.pc /usr/local/lib/pkgconfig/pcl_2d-1.9.pc;
     fi
 
 # eval "${MATRIX_EVAL}";
@@ -211,14 +211,14 @@ install:
 
       eval "${MATRIX_EVAL}";
     fi
-  - if [[ ( "$TRAVIS_OS_NAME" == "linux" ) && ( "$PCL_VERSION" == "1.8" ) ]]; then
+  - if [[ ( "$TRAVIS_OS_NAME" == "linux" ) && ( "$PCL_VERSION" == "1.9" ) ]]; then
       sudo add-apt-repository -y ppa:webupd8team/java && sudo apt update && sudo apt -y install oracle-java8-installer;
       
       sudo apt-get install zram-config;
       
       sudo apt -y install g++ doxygen mpi-default-dev openmpi-bin openmpi-common libusb-1.0-0-dev libqhull* libusb-dev libgtest-dev;
       sudo apt -y install git-core freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libphonon-dev libphonon-dev phonon-backend-gstreamer;
-      sudo apt -y install phonon-backend-vlc graphviz mono-complete qt-sdk libflann-dev libflann1.8 libboost-all-dev libeigen3-dev;
+      sudo apt -y install phonon-backend-vlc graphviz mono-complete qt-sdk libflann-dev libflann1.9 libboost-all-dev libeigen3-dev;
       
       wget --no-check-certificate -qO- http://www.cmake.org/files/v3.6/cmake-3.6.2-Linux-x86_64.tar.gz -O /tmp/cmake-3.6.2-Linux-x86_64.tar.gz;
       tar -xvf /tmp/cmake-3.6.2-Linux-x86_64.tar.gz;
@@ -230,9 +230,9 @@ install:
       
       sudo apt-get install ninja-build;
       
-      wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.8.0.tar.gz;
-      tar -xf pcl-1.8.0.tar.gz;
-      cd pcl-pcl-1.8.0 && mkdir build && cd build;
+      wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.9.0.tar.gz;
+      tar -xf pcl-1.9.0.tar.gz;
+      cd pcl-pcl-1.9.0 && mkdir build && cd build;
       cmake -G Ninja -DWITH_OPENGL:BOOL=OFF -DWITH_FZAPI:BOOL=OFF -DWITH_LIBUSB:BOOL=OFF -DWITH_VTK:BOOL=OFF -DBUILD_OPENNI:BOOL=OFF -DBUILD_OPENNI2:BOOL=OFF -DBUILD_apps:BOOL=OFF -DBUILD_geometry:BOOL=OFF -DBUILD_global_tests:BOOL=OFF -DBUILD_outofcore:BOOL=OFF -DBUILD_people:BOOL=OFF -DBUILD_tools:BOOL=OFF -DBUILD_tracking:BOOL=OFF -DBUILD_visualization:BOOL=OFF -DBUILD_examples:BOOL=OFF ..;
       
       travis_wait 50 ninja -j4;
