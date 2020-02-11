@@ -76,7 +76,7 @@ if platform.system() == "Windows":
     flann_root = os.environ.get('FLANN_ROOT', pcl_root + '\\3rdParty\\Flann')
     qhull_root = os.environ.get('QHULL_ROOT', pcl_root + '\\3rdParty\\Qhull')
     vtk_root = os.environ.get('VTK_ROOT', pcl_root + '\\3rdParty\\VTK')
-    pcl_version = '-' + os.environ.get('PCL_VERSION', '1.8')
+    pcl_version = '-' + os.environ.get('PCL_VERSION', '1.9')
 
     # custom(CUDA)
     # custom(WinPcap)
@@ -87,11 +87,11 @@ if platform.system() == "Windows":
     # Python Version Check
     info = sys.version_info
 
-    # PCL 1.8.1
+    # PCL 1.9.1
     boost_version = '1_65'
     vtk_version = '8.1'
-    # pcl-1.8
-    # 1.8.1 use 2d required features
+    # pcl-1.9
+    # 1.9.1 use 2d required features
     pcl_libs = ["2d", "common", "features", "filters", "geometry",
                 "io", "kdtree", "keypoints", "ml", "octree", "outofcore", "people",
             "recognition", "registration", "sample_consensus", "search",
@@ -116,8 +116,8 @@ if platform.system() == "Windows":
     #     ext_args['include_dirs'].append(flag.lstrip().rstrip())
 
     # no use pkg-config
-    if pcl_version == '-1.8':
-        # 1.8.0
+    if pcl_version == '-1.9':
+        # 1.9.0
         # boost 1.6.1
         # vtk 7.0
         inc_dirs = [pcl_root + '\\include\\pcl' + pcl_version, eigen_root, boost_root + '\\include\\boost', flann_root + '\\include', vtk_root + '\\include\\vtk-' + vtk_version]
@@ -137,8 +137,8 @@ if platform.system() == "Windows":
     # end
 
     # set library path
-    if pcl_version == '-1.8':
-        # 1.8.0
+    if pcl_version == '-1.9':
+        # 1.9.0
         # 3rdParty(+Boost, +VTK)
         lib_dirs = [pcl_root + '\\lib', pcl_root + '\\3rdParty\\Boost\\lib', pcl_root + '\\3rdParty\\FLANN\\lib', pcl_root + '\\3rdParty\\VTK\lib']
     else:
@@ -164,7 +164,7 @@ if platform.system() == "Windows":
     #         continue
     #     ext_args['libraries'].append(flag.lstrip().rstrip())
 
-    if pcl_version == '-1.8':
+    if pcl_version == '-1.9':
         # release
         # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s']
         # libreleases = ['pcl_common_release', 'pcl_features_release', 'pcl_filters_release', 'pcl_io_release', 'pcl_io_ply_release', 'pcl_kdtree_release', 'pcl_keypoints_release', 'pcl_octree_release', 'pcl_registration_release', 'pcl_sample_consensus_release', 'pcl_segmentation_release', 'pcl_search_release', 'pcl_surface_release', 'pcl_tracking_release', 'pcl_visualization_release', 'flann', 'flann_s', 'vtkInfovis', 'MapReduceMPI', 'vtkNetCDF', 'QVTK', 'vtkNetCDF_cxx', 'vtkRendering', 'vtkViews', 'vtkVolumeRendering', 'vtkWidgets', 'mpistubs', 'vtkalglib', 'vtkCharts', 'vtkexoIIc', 'vtkexpat', 'vtkCommon', 'vtkfreetype', 'vtkDICOMParser', 'vtkftgl', 'vtkFiltering', 'vtkhdf5', 'vtkjpeg', 'vtkGenericFiltering', 'vtklibxml2', 'vtkGeovis', 'vtkmetaio', 'vtkpng', 'vtkGraphics', 'vtkproj4', 'vtkHybrid', 'vtksqlite', 'vtksys', 'vtkIO', 'vtktiff', 'vtkImaging', 'vtkverdict', 'vtkzlib']
@@ -199,7 +199,7 @@ if platform.system() == "Windows":
     # Add OpenGL32 .h/.lib
     win_kit_incs = []
     win_kit_libdirs = []
-    if pcl_version == '-1.8':
+    if pcl_version == '-1.9':
         if is_64bits == True:
             # already set path
             # win_kit_libdirs = ['C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v8.1A\\Lib\\x64']
@@ -303,7 +303,7 @@ if platform.system() == "Windows":
 
     print(ext_args)
 
-    if pcl_version == '-1.8':
+    if pcl_version == '-1.9':
         module = [Extension("pcl._pcl", ["pcl/_pcl_180.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
                   Extension("pcl.pcl_visualization", [
                       "pcl/pcl_visualization.pyx"], language="c++", **ext_args),
@@ -334,7 +334,7 @@ else:
         os.environ['ARCHFLAGS'] = ''
 
     # Try to find PCL. XXX we should only do this when trying to build or install.
-    PCL_SUPPORTED = ["-1.8", ""]    # in order of preference
+    PCL_SUPPORTED = ["-1.9", ""]    # in order of preference
 
     for pcl_version in PCL_SUPPORTED:
         if subprocess.call(['pkg-config', 'pcl_common%s' % pcl_version]) == 0:
@@ -373,7 +373,7 @@ else:
     # ext_args['include_dirs'].append('/usr/include/vtk-5.8')
     # ext_args['library_dirs'].append('/usr/lib')
     # ext_args['libraries'].append('libvtk*.so')
-    # pcl 1.8.1(MacOSX)
+    # pcl 1.9.1(MacOSX)
     # ext_args['include_dirs'].append('/usr/local/include/vtk-8.0')
     # ext_args['library_dirs'].append('/usr/local/lib')
     # ext_args['include_dirs'].append('/usr/local/Cellar/vtk/8.0.1/include')
@@ -427,7 +427,7 @@ else:
 
     print(ext_args)
 
-    if pcl_version == '-1.8':
+    if pcl_version == '-1.9':
         module = [Extension("pcl._pcl", ["pcl/_pcl_180.pyx", "pcl/minipcl.cpp", "pcl/ProjectInliers.cpp"], language="c++", **ext_args),
                   # Extension("pcl.pcl_visualization", ["pcl/pcl_visualization.pyx"], language="c++", **ext_args),
                   # Extension("pcl.pcl_grabber", ["pcl/pcl_grabber.pyx", "pcl/grabber_callback.cpp"], language="c++", **ext_args),
@@ -445,7 +445,7 @@ else:
 setup(name='python_pcl',
       description='pcl wrapper',
       url='http://github.com/strawlab/python-pcl',
-      version='1.8.1',
+      version='1.9.1',
       author='John Stowers',
       author_email='john.stowers@gmail.com',
       maintainer='Tooru Oonuma',
@@ -460,7 +460,9 @@ setup(name='python_pcl',
       install_requires=install_requires,
       classifiers=[
           'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
         ],
       tests_require=['mock', 'nose'],
       ext_modules=module,
