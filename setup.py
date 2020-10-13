@@ -92,7 +92,7 @@ if platform.system() == "Windows":
     if sys.platform == 'linux':
         vtk_version = '8.1'
     else:
-        vkt_version = '8.2'
+        vtk_version = '8.2'
     # pcl-1.9
     # 1.9.1 use 2d required features
     pcl_libs = ["2d", "common", "features", "filters", "geometry",
